@@ -1,0 +1,3 @@
+First,Remove files from local repository. git rm -r File-Name. or, remove files only from local repository but from filesystem.
+Secondly, Commit changes into local repository. git commit -m "unwanted files or some inline comments"
+Finally, update/push local changes into remote repository. git push.
