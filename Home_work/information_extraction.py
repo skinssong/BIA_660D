@@ -87,15 +87,10 @@ class Trip(object):
         return self.time + self.destination
 
 
-# In[ ]:
-
 
 persons = []
 pets = []
 trips = []
-
-
-# In[ ]:
 
 
 def select_person(name):
@@ -114,9 +109,6 @@ def add_person(name):
         return new_person
     else:
         return person
-
-
-# In[ ]:
 
 
 def select_pet(name):
@@ -184,7 +176,6 @@ def generate_triplet(file_path='./assignment_01.data'):
     return triples
 
 
-
 def process_relation_triplet(mytuple):
     sentence = mytuple[0]
     doc = nlp(unicode(sentence))
@@ -245,8 +236,6 @@ def process_relation_triplet(mytuple):
                 subj_person = add_person(subj_name)
                 subj_person.add_trip(new_trip)
 
-
-
 def person_has_pet(pet_type):
     answer = '{} has a {} named {}.'
     pet_type_pets = [pet for pet in pets if pet.type is pet_type]
@@ -265,7 +254,7 @@ def do_person_likes_person(name_a, name_b):
         if person_b is None:
             print('person {} not found.'.format(name_b))
         elif person_b not in person_a.likes:
-            print("I don't know".format(name_a, name_b))
+            print("I don't know")
         else:
             print('person {} likes person {}'.format(name_a, name_b))
 
@@ -283,10 +272,10 @@ def who_likes_person(name_b):
 def person_likes_who(name_a):
     person_a = select_person(name_a)
     if person_a is None:
-        print("I don't know".format(name_a))
+        print('person {} not found.'.format(name_a))
     else:
         if len(person_a.likes) == 0:
-            print("I don't know".format(name_a))
+            print("I don't know")
         for person_b in person_a.likes:
             print('person {} likes person {}'.format(person_a.name, person_b.name))
 
@@ -294,14 +283,13 @@ def person_likes_who(name_a):
 def person_pet_name(person_name, pet_type):
     person = select_person(person_name)
     if person is None:
-        print("I don't know".format(person_name))
+        print('person {} not found.'.format(person_name))
     else:
         if len(person.has) == 0 or person.has[0].type != pet_type:
-            print('{} does not have {}'.format(person_name, pet_type))
+            print("I don't know")
         else:
             pet_name = person.has[0].name
             print("{}'s {}'s name is {}".format(person_name, pet_type, pet_name))
-
 
 
 def person_travel(name_a):
@@ -330,7 +318,6 @@ def when_person_to_place(person_name, place_name):
         else:
             trip = get_trip(place_name)
             print('{} is planning to travel to {} at {}'.format(person_name, place_name, trip.time))
-
 
 
 def preprocess_question(question):
@@ -417,15 +404,15 @@ def answer_question(question):
         person_name = q_trip.subject
         person_likes_who(person_name)
 
-
-temp = nlp(u"Who likes Bob?")
-[(e.text, e.label_) for e in temp.ents]
-
-
-def main():
+def process_data_from_input_file():
     triples = generate_triplet()
     for triple in triples:
         process_relation_triplet(triple)
+
+
+def main():
+
+    process_data_from_input_file()
 
     question = ' '
     while question[-1] != '?':
